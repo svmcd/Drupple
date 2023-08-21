@@ -22,17 +22,23 @@ const styles = StyleSheet.create({
     elevation: 18,
     zIndex: 2,
   },
-  headerTitle: {
-    fontSize: SIZES.large,
-    fontFamily: FONT.medium,
+  slidesContainer: {
+    padding: SIZES.md,
+    gap: 10
+  },
+  coloredDrupple: {
     color: COLORS.primary,
   },
-  headerBtn: {
-    fontSize: SIZES.medium,
-    fontFamily: FONT.medium,
-    color: COLORS.gray,
+  title: {
+    fontFamily: FONT.semibold,
+    fontSize: SIZES.xxl,
+    color: COLORS.black,
   },
-
+  text: {
+    fontFamily: FONT.medium,
+    fontSize: SIZES.lg,
+    color: COLORS.black,
+  },
   svgTopRight: (zIndex, top, right) => ({
     position: "absolute",
     zIndex: zIndex,

@@ -8,7 +8,6 @@ import { COLORS } from "../constants/theme";
 const Index = () => {
   return (
     <View style={styles.container}>
-      <Text>Hello setup</Text>
       <Slider />
     </View>
   );

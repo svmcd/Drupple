@@ -10,7 +10,7 @@ const COLORS = {
 const FONT = {
   regular: "PRegular",
   medium: "PMedium",
-  semibold: "PSemibold",
+  semibold: "PSemiBold",
   bold: "PBold",
 };
 
@@ -19,8 +19,8 @@ const SIZES = {
   sm: 12,
   md: 16,
   lg: 20,
-  xl: 24,
-  xxl: 32,
+  xl: 28,
+  xxl: 36,
 };
 
 export { COLORS, FONT, SIZES };
