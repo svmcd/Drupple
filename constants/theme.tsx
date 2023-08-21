@@ -23,4 +23,4 @@ const SIZES = {
   xxl: 32,
 };
 
-export { COLORS, SIZES };
+export { COLORS, FONT, SIZES };

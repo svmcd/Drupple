@@ -3,13 +3,24 @@ import { StyleSheet } from "react-native";
 import { FONT, SIZES, COLORS } from "../constants/theme";
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: SIZES.xLarge,
+  page: {
+    flex: 1,
+    backgroundColor: COLORS.secondary,
+    justifyContent: "flex-end"
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  container: {
+    backgroundColor: COLORS.white,
+    height: "65%",
+    borderRadius: "25px 0 0 25px",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 13,
+    },
+    shadowOpacity: 0.24,
+    shadowRadius: 14.86,
+    elevation: 18,
+    zIndex: 2,
   },
   headerTitle: {
     fontSize: SIZES.large,
@@ -21,9 +32,20 @@ const styles = StyleSheet.create({
     fontFamily: FONT.medium,
     color: COLORS.gray,
   },
-  cardsContainer: {
-    marginTop: SIZES.medium,
-  },
+
+  svgTopRight: (zIndex, top, right) => ({
+    position: "absolute",
+    zIndex: zIndex,
+    top: top,
+    right: right,
+  }),
+
+  svgTopLeft: (zIndex, top, left) => ({
+    position: "absolute",
+    zIndex: zIndex,
+    top: top,
+    left: left,
+  }),
 });
 
 export default styles;

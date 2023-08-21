@@ -1,15 +1,17 @@
-import { SafeAreaView, View, Text } from "react-native";
+// import { SafeAreaView, View, Text } from "react-native";
 
-import { COLORS } from "../constants/theme";
+// import styles from "../styles/global";
 
-const Setup = () => {
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.secondary }}>
-      <View>
-        <Text>Hello setup</Text>
-      </View>
-    </SafeAreaView>
-  );
-};
+// import { COLORS } from "../constants/theme";
 
-export default Setup;
+// const Setup = () => {
+//   return (
+//     <SafeAreaView style={styles.page}>
+//       <View style={styles.container}>
+//         <Text>Hello setup</Text>
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default Setup;
