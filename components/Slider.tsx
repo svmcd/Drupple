@@ -2,12 +2,15 @@ import { useState } from "react";
 
 import { Dimensions, Text, View, TouchableOpacity } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
-
 import SliderSlide from "./SliderSlide";
+import Dots from "../assets/svg/Dots";
+
+import styles from "../styles/global";
 
 function Slider() {
   const [autoPlayMode, setAutoPlayMode] = useState(false);
   const [autoPlayReverseMode, setAutoPlayReverseMode] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNextPage = () => {
     setAutoPlayMode(!autoPlayMode);
@@ -39,7 +42,7 @@ function Slider() {
       <Carousel
         loop={false}
         width={width - 15}
-        height={350}
+        height={375}
         autoPlay={autoPlayMode}
         autoPlayReverse={autoPlayReverseMode}
         autoPlayInterval={100}
@@ -59,7 +62,9 @@ function Slider() {
         ]}
         scrollAnimationDuration={500}
         // style={{ backgroundColor: "blue" }}
-        // onSnapToItem={(index) => {}}
+        onSnapToItem={(index) => {
+          setCurrentIndex(index);
+        }}
         renderItem={({ item, index }) => (
           <SliderSlide title={item.title} text={item.text} index={index} />
         )}
@@ -67,18 +72,40 @@ function Slider() {
       <View
         style={{
           flex: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
+          flexDirection: "column",
           // backgroundColor: "red",
           width: "100%",
         }}
       >
-        <TouchableOpacity onPress={handlePreviousPage}>
-          <Text>Previous</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleNextPage}>
-          <Text>Next</Text>
-        </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: currentIndex === 0 ? "center" : "space-between",
+            alignItems: "flex-start",
+          }}
+        >
+          {currentIndex > 0 && (
+            <TouchableOpacity
+              onPress={handlePreviousPage}
+              style={styles.buttonPassive}
+            >
+              <Text style={styles.buttonPassive}>Back</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity onPress={handleNextPage} style={styles.buttonCTA}>
+            <Text style={styles.buttonCTA}>
+              {currentIndex === 0 ? "Let's get started" : "Continue"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Dots index={currentIndex} styles={""} />
+        </View>
       </View>
     </View>
   );
