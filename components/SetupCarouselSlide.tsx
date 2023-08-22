@@ -3,7 +3,7 @@ import { SIZES } from "../constants/theme";
 
 import styles from "../styles/global";
 
-const SliderSlide = ({ title, text, index }) => {
+const SetupCarouselSlide = ({ title, text, index }) => {
   const coloredPart = index === 0 ? title.slice(-8, -1) : title;
   const nonColoredPart = index === 0 ? title.slice(0, -8) : title;
   const nonColoredPart2 = index === 0 ? title.slice(18) : title;
@@ -24,4 +24,4 @@ const SliderSlide = ({ title, text, index }) => {
   );
 };
 
-export default SliderSlide;
+export default SetupCarouselSlide;
