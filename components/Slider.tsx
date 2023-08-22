@@ -89,12 +89,16 @@ function Slider() {
               onPress={handlePreviousPage}
               style={styles.buttonPassive}
             >
-              <Text style={styles.buttonPassive}>Back</Text>
+              <Text style={styles.textBlue}>Back</Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity onPress={handleNextPage} style={styles.buttonCTA}>
-            <Text style={styles.buttonCTA}>
-              {currentIndex === 0 ? "Let's get started" : "Continue"}
+          <TouchableOpacity onPress={handleNextPage} style={styles.buttonCta}>
+            <Text style={styles.textWhite}>
+              {currentIndex === 0
+                ? "Let's get started"
+                : currentIndex === 1
+                ? "Continue"
+                : "Finish"}
             </Text>
           </TouchableOpacity>
         </View>
