@@ -76,6 +76,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  numberInput: {
+    backgroundColor: COLORS.grey,
+    fontFamily: FONT.medium,
+    fontSize: SIZES.lg,
+    width: 40,
+    paddingVertical: 5,
+    textAlign: 'center'
+  },
+  option: {
+    backgroundColor: COLORS.grey,
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+    borderRadius: 25,
+    marginHorizontal: 10,
+  },
   svgTopRight: (zIndex, top, right) => ({
     position: "absolute",
     zIndex: zIndex,
