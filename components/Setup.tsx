@@ -45,7 +45,8 @@ function Setup() {
       <View
         style={{
           flexDirection: "column",
-          gap: 15,
+          gap: 10,
+          paddingBottom: 25,
           width: "100%",
         }}
       >

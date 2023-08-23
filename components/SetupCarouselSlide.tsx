@@ -86,18 +86,33 @@ const SetupCarouselSlide = ({ title, text, index }) => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
-                <TouchableOpacity style={styles.option}>
-                  <Text style={styles.text}>Sedentary</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.option}>
-                  <Text style={styles.text}>Lightly active</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.option}>
-                  <Text style={styles.text}>Moderately active</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.option}>
-                  <Text style={styles.text}>Active</Text>
-                </TouchableOpacity>
+                {[
+                  "Sedentary",
+                  "Lightly active",
+                  "Moderately active",
+                  "Active",
+                ].map((option) => (
+                  <TouchableOpacity
+                    key={option}
+                    style={[
+                      styles.option,
+                      selectedOption === option && {
+                        backgroundColor: COLORS.primary,
+                      },
+                    ]}
+                    onPress={() => setSelectedOption(option)}
+                  >
+                    <Text
+                      style={[
+                        selectedOption === option
+                          ? styles.textWhite
+                          : styles.text,
+                      ]}
+                    >
+                      {option}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
               </ScrollView>
             </View>
           </View>
