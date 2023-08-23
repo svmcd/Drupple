@@ -31,11 +31,10 @@ function Setup() {
   return (
     <View
       style={{
-        flex: 1,
-        gap: 10,
         padding: 10,
-        justifyContent: "center",
+        height: "100%",
         alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
       <SetupCarousel
@@ -45,9 +44,8 @@ function Setup() {
       />
       <View
         style={{
-          flex: 1,
           flexDirection: "column",
-          // backgroundColor: "red",
+          gap: 15,
           width: "100%",
         }}
       >
@@ -79,7 +77,7 @@ function Setup() {
         <View
           style={{
             alignItems: "center",
-            justifyContent: "center",
+            height: 40,
           }}
         >
           <Dots index={currentIndex} styles={""} />

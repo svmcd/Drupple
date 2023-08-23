@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 import { FONT, SIZES, COLORS } from "../constants/theme";
+import { Dimensions } from "react-native";
+
+const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   page: {
@@ -9,9 +12,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   container: {
+    height: windowHeight / 1.5,
     backgroundColor: COLORS.white,
-    height: "65%",
-    borderRadius: "25px 0 0 25px",
+    borderTopLeftRadius: "25px",
+    borderTopRightRadius: "25px",
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,
@@ -89,7 +93,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 10,
     borderRadius: 25,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
   },
   svgTopRight: (zIndex, top, right) => ({
     position: "absolute",

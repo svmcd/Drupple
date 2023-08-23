@@ -21,7 +21,7 @@ const Dots = ({ index, styles }) => {
 
   const selectedSvg = svgArray[index];
 
-  return <SvgXml xml={selectedSvg} height="45%" style={styles} />;
+  return <SvgXml xml={selectedSvg} height="100%" style={styles} />;
 };
 
 export default Dots;

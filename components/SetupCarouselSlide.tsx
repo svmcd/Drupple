@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -11,27 +11,35 @@ import { SIZES, COLORS } from "../constants/theme";
 import styles from "../styles/global";
 
 const SetupCarouselSlide = ({ title, text, index }) => {
+  const [weight, onChangeWeight] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+
   const coloredPart = index === 0 ? title.slice(-8, -1) : title;
   const nonColoredPart = index === 0 ? title.slice(0, -8) : title;
   const nonColoredPart2 = index === 0 ? title.slice(18) : title;
 
   return (
-    <View style={{ overflow: "hidden" }}>
-      <View style={{ padding: SIZES.md }}>
-        <Text style={[styles.title, { marginBottom: SIZES.xs }]}>
-          {nonColoredPart}
-          {index === 0 && (
-            <>
-              <Text style={styles.coloredDrupple}>{coloredPart}</Text>
-              <Text>{nonColoredPart2}</Text>
-            </>
-          )}
-        </Text>
-        <Text style={styles.text}>{text}</Text>
+    <View
+      style={{
+        overflow: "hidden",
+      }}
+    >
+      <View style={{ padding: SIZES.md, gap: 20 }}>
+        <View>
+          <Text style={[styles.title, { marginBottom: SIZES.xs }]}>
+            {nonColoredPart}
+            {index === 0 && (
+              <>
+                <Text style={styles.coloredDrupple}>{coloredPart}</Text>
+                <Text>{nonColoredPart2}</Text>
+              </>
+            )}
+          </Text>
+          <Text style={styles.text}>{text}</Text>
+        </View>
         {index === 1 && (
           <View
             style={{
-              height: "60%",
               justifyContent: "center",
               gap: 25,
             }}
@@ -49,7 +57,12 @@ const SetupCarouselSlide = ({ title, text, index }) => {
                   borderRadius: 25,
                 }}
               >
-                <TextInput style={styles.numberInput} maxLength={3} />
+                <TextInput
+                  style={styles.numberInput}
+                  onChangeText={onChangeWeight}
+                  value={weight}
+                  maxLength={3}
+                />
                 <Text
                   style={[
                     styles.text,
@@ -74,10 +87,13 @@ const SetupCarouselSlide = ({ title, text, index }) => {
                 showsHorizontalScrollIndicator={false}
               >
                 <TouchableOpacity style={styles.option}>
-                  <Text style={styles.text}>Low</Text>
+                  <Text style={styles.text}>Sedentary</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.option}>
-                  <Text style={styles.text}>Moderate</Text>
+                  <Text style={styles.text}>Lightly active</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.option}>
+                  <Text style={styles.text}>Moderately active</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.option}>
                   <Text style={styles.text}>Active</Text>
