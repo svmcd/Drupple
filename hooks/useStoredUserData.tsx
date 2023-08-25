@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+type UserData = {
+  dailyWaterIntake: number;
+  selectedOption: string;
+  weight: string;
+};
+
 function useStoredUserData() {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
     const getData = async () => {

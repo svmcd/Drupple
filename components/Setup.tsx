@@ -2,8 +2,7 @@ import { useState } from "react";
 
 import { Text, View, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import useStoredUserData from "../hooks/useStoredUserData";
+import { useRouter } from "expo-router";
 
 import SetupCarousel from "./SetupCarousel";
 import Dots from "../assets/svg/Dots";
@@ -11,7 +10,7 @@ import styles from "../styles/global";
 import { COLORS } from "../constants/theme";
 
 function Setup() {
-  const userData = useStoredUserData();
+  const router = useRouter();
 
   const [autoPlayMode, setAutoPlayMode] = useState(false);
   const [autoPlayReverseMode, setAutoPlayReverseMode] = useState(false);
@@ -24,6 +23,7 @@ function Setup() {
   const handleNextPage = async () => {
     setDailyWaterIntake(waterIntake);
     if (currentIndex === 2) {
+      router.push("home");
       try {
         const data = { dailyWaterIntake, selectedOption, weight };
         const jsonValue = JSON.stringify(data);
@@ -74,18 +74,6 @@ function Setup() {
         justifyContent: "space-between",
       }}
     >
-      <View style={{ position: "absolute", top: -100 }}>
-        <Text>Stored User Data:</Text>
-        {userData ? (
-          <View>
-            <Text>Selected Option: {userData.dailyWaterIntake}</Text>
-            <Text>Selected Option: {userData.selectedOption}</Text>
-            <Text>Weight: {userData.weight}</Text>
-          </View>
-        ) : (
-          <Text>No data stored yet.</Text>
-        )}
-      </View>
       <SetupCarousel
         autoPlayMode={autoPlayMode}
         autoPlayReverseMode={autoPlayReverseMode}
