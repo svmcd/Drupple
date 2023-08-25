@@ -80,6 +80,7 @@ const SetupCarouselSlide = ({
                   onChangeText={onChangeWeight}
                   value={weight}
                   maxLength={3}
+                  keyboardType="numeric"
                 />
                 <Text
                   style={[
