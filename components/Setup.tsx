@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import { Text, View, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import SetupCarousel from "./SetupCarousel";
 import Dots from "../assets/svg/Dots";
-
 import styles from "../styles/global";
 import { COLORS } from "../constants/theme";
 
@@ -15,8 +15,19 @@ function Setup() {
   const [weight, onChangeWeight] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [dailyWaterIntake, setDailyWaterIntake] = useState(0);
 
-  const handleNextPage = () => {
+  const handleNextPage = async () => {
+    setDailyWaterIntake(waterIntake);
+    if (currentIndex === 2) {
+      try {
+        const data = { dailyWaterIntake, selectedOption, weight };
+        const jsonValue = JSON.stringify(data);
+        await AsyncStorage.setItem("userData", jsonValue);
+      } catch (e) {
+        console.error("Error storing data:", e);
+      }
+    }
     setAutoPlayMode(!autoPlayMode);
     setDisabled(true);
     setTimeout(() => {
@@ -35,6 +46,20 @@ function Setup() {
       setAutoPlayReverseMode(false);
     }, 200);
   };
+
+  const WATER_PER_KG = 0.035;
+  const activityMultipliers = {
+    Sedentary: 1.0,
+    "Lightly active": 1.11,
+    "Moderately active": 1.24,
+    Active: 1.35,
+    "Very Active": 1.42,
+  };
+
+  const waterIntake =
+    Math.round(
+      parseInt(weight) * WATER_PER_KG * activityMultipliers[selectedOption] * 10
+    ) / 10;
 
   return (
     <View

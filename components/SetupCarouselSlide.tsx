@@ -31,10 +31,10 @@ const SetupCarouselSlide = ({
     "Very Active": 1.42,
   };
 
-  const baseWaterIntake = weight * WATER_PER_KG;
-  const adjustedWaterIntake =
-    baseWaterIntake * activityMultipliers[selectedOption];
-  const roundedWaterIntake = Math.round(adjustedWaterIntake * 10) / 10;
+  const waterIntake =
+    Math.round(
+      parseInt(weight) * WATER_PER_KG * activityMultipliers[selectedOption] * 10
+    ) / 10;
 
   return (
     <View
@@ -146,8 +146,6 @@ const SetupCarouselSlide = ({
               gap: 25,
             }}
           >
-            {/* <Text style={styles.titleBlue}>{weight}</Text>
-            <Text style={styles.titleBlue}>{selectedOption}</Text> */}
             <View
               style={{
                 flexDirection: "column",
@@ -155,13 +153,13 @@ const SetupCarouselSlide = ({
                 gap: -10,
               }}
             >
-              <Text style={styles.titleBlueBig}>{roundedWaterIntake}</Text>
+              <Text style={styles.titleBlueBig}>{waterIntake}</Text>
               <Text style={styles.textBlue}>liters/day</Text>
             </View>
             <View style={{ width: "100%" }}>
               <Text style={styles.text}>
-                That's about {Math.round(roundedWaterIntake / 0.25)} glasses of
-                water everyday.
+                That's about {Math.round(waterIntake / 0.25)} glasses of water
+                everyday.
               </Text>
             </View>
           </View>
