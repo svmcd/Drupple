@@ -6,17 +6,25 @@ import SetupCarousel from "./SetupCarousel";
 import Dots from "../assets/svg/Dots";
 
 import styles from "../styles/global";
+import { COLORS } from "../constants/theme";
 
 function Setup() {
   const [autoPlayMode, setAutoPlayMode] = useState(false);
   const [autoPlayReverseMode, setAutoPlayReverseMode] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [weight, onChangeWeight] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const handleNextPage = () => {
     setAutoPlayMode(!autoPlayMode);
+    setDisabled(true);
     setTimeout(() => {
       setAutoPlayMode(false);
     }, 200);
+    setTimeout(() => {
+      setDisabled(false);
+    }, 2000);
   };
 
   const handlePreviousPage = () => {
@@ -41,6 +49,10 @@ function Setup() {
         autoPlayMode={autoPlayMode}
         autoPlayReverseMode={autoPlayReverseMode}
         setCurrentIndex={setCurrentIndex}
+        weight={weight}
+        onChangeWeight={onChangeWeight}
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
       />
       <View
         style={{
@@ -62,10 +74,25 @@ function Setup() {
               onPress={handlePreviousPage}
               style={styles.buttonPassive}
             >
-              <Text style={styles.textBlue}>Back</Text>
+              <Text style={styles.textBlue}>
+                {currentIndex === 2 ? "Edit" : "Back"}
+              </Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity onPress={handleNextPage} style={styles.buttonCta}>
+          <TouchableOpacity
+            onPress={handleNextPage}
+            style={[
+              styles.buttonCta,
+              currentIndex === 1 &&
+                (weight === "" || selectedOption === "") && {
+                  backgroundColor: COLORS.darkerGrey,
+                },
+            ]}
+            disabled={
+              disabled ||
+              (currentIndex === 1 && (weight === "" || selectedOption === ""))
+            }
+          >
             <Text style={styles.textWhite}>
               {currentIndex === 0
                 ? "Let's get started"

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   View,
   Text,
@@ -10,13 +9,32 @@ import {
 import { SIZES, COLORS } from "../constants/theme";
 import styles from "../styles/global";
 
-const SetupCarouselSlide = ({ title, text, index }) => {
-  const [weight, onChangeWeight] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-
+const SetupCarouselSlide = ({
+  title,
+  text,
+  index,
+  weight,
+  onChangeWeight,
+  selectedOption,
+  setSelectedOption,
+}) => {
   const coloredPart = index === 0 ? title.slice(-8, -1) : title;
   const nonColoredPart = index === 0 ? title.slice(0, -8) : title;
   const nonColoredPart2 = index === 0 ? title.slice(18) : title;
+
+  const WATER_PER_KG = 0.035;
+  const activityMultipliers = {
+    Sedentary: 1.0,
+    "Lightly active": 1.11,
+    "Moderately active": 1.24,
+    Active: 1.35,
+    "Very Active": 1.42,
+  };
+
+  const baseWaterIntake = weight * WATER_PER_KG;
+  const adjustedWaterIntake =
+    baseWaterIntake * activityMultipliers[selectedOption];
+  const roundedWaterIntake = Math.round(adjustedWaterIntake * 10) / 10;
 
   return (
     <View
@@ -30,7 +48,7 @@ const SetupCarouselSlide = ({ title, text, index }) => {
             {nonColoredPart}
             {index === 0 && (
               <>
-                <Text style={styles.coloredDrupple}>{coloredPart}</Text>
+                <Text style={styles.titleBlue}>{coloredPart}</Text>
                 <Text>{nonColoredPart2}</Text>
               </>
             )}
@@ -91,6 +109,7 @@ const SetupCarouselSlide = ({ title, text, index }) => {
                   "Lightly active",
                   "Moderately active",
                   "Active",
+                  "Very Active",
                 ].map((option) => (
                   <TouchableOpacity
                     key={option}
@@ -114,6 +133,33 @@ const SetupCarouselSlide = ({ title, text, index }) => {
                   </TouchableOpacity>
                 ))}
               </ScrollView>
+            </View>
+          </View>
+        )}
+        {index === 2 && (
+          <View
+            style={{
+              alignItems: "center",
+              gap: 25,
+            }}
+          >
+            {/* <Text style={styles.titleBlue}>{weight}</Text>
+            <Text style={styles.titleBlue}>{selectedOption}</Text> */}
+            <View
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+                gap: -10,
+              }}
+            >
+              <Text style={styles.titleBlueBig}>{roundedWaterIntake}</Text>
+              <Text style={styles.textBlue}>liters/day</Text>
+            </View>
+            <View style={{ width: "100%" }}>
+              <Text style={styles.text}>
+                That's about {Math.round(roundedWaterIntake / 0.25)} glasses of
+                water everyday.
+              </Text>
             </View>
           </View>
         )}

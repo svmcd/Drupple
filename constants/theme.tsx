@@ -22,6 +22,7 @@ const SIZES = {
   lg: 20,
   xl: 28,
   xxl: 36,
+  xxxl: 60,
 };
 
 export { COLORS, FONT, SIZES };

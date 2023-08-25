@@ -30,13 +30,20 @@ const styles = StyleSheet.create({
     padding: SIZES.md,
     gap: 10
   },
-  coloredDrupple: {
-    color: COLORS.primary,
-  },
   title: {
     fontFamily: FONT.semibold,
     fontSize: SIZES.xxl,
     color: COLORS.black,
+  },
+  titleBlue: {
+    fontFamily: FONT.semibold,
+    fontSize: SIZES.xxl,
+    color: COLORS.primary,
+  },
+  titleBlueBig: {
+    fontFamily: FONT.bold,
+    fontSize: SIZES.xxxl,
+    color: COLORS.primary,
   },
   text: {
     fontFamily: FONT.medium,

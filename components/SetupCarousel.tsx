@@ -7,6 +7,10 @@ const SetupCarousel = ({
   autoPlayMode,
   autoPlayReverseMode,
   setCurrentIndex,
+  weight,
+  onChangeWeight,
+  selectedOption,
+  setSelectedOption,
 }) => {
   const width = Dimensions.get("window").width;
 
@@ -18,6 +22,7 @@ const SetupCarousel = ({
       autoPlay={autoPlayMode}
       autoPlayReverse={autoPlayReverseMode}
       autoPlayInterval={100}
+      enabled={false}
       data={[
         {
           title: "Welcome to Drupple!",
@@ -33,12 +38,19 @@ const SetupCarousel = ({
         },
       ]}
       scrollAnimationDuration={500}
-      // style={{ backgroundColor: "blue" }}
       onSnapToItem={(index) => {
         setCurrentIndex(index);
       }}
       renderItem={({ item, index }) => (
-        <SetupCarouselSlide title={item.title} text={item.text} index={index} />
+        <SetupCarouselSlide
+          title={item.title}
+          text={item.text}
+          index={index}
+          weight={weight}
+          onChangeWeight={onChangeWeight}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
       )}
     />
   );
