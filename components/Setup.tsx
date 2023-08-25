@@ -24,7 +24,7 @@ function Setup() {
     }, 200);
     setTimeout(() => {
       setDisabled(false);
-    }, 2000);
+    }, 1000);
   };
 
   const handlePreviousPage = () => {

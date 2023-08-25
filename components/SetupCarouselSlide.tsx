@@ -77,7 +77,9 @@ const SetupCarouselSlide = ({
               >
                 <TextInput
                   style={styles.numberInput}
-                  onChangeText={onChangeWeight}
+                  onChangeText={(value) => {
+                    onChangeWeight(value.replace(/[^0-9]/g, ""));
+                  }}
                   value={weight}
                   maxLength={3}
                   keyboardType="numeric"
