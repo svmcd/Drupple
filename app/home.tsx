@@ -14,12 +14,15 @@ const Home = () => {
           <Text>Daily water intake: {userData.dailyWaterIntake} liter</Text>
           <Text>Selected Option: {userData.selectedOption}</Text>
           <Text>Weight: {userData.weight}</Text>
-          <Text> {userData.setupFinished ? "finished" : "not finished"}</Text>
+          <Text>
+            Setup progress:
+            {userData.setupFinished ? " Finished" : " Not finished"}
+          </Text>
         </View>
       ) : (
         <Text>No data stored yet.</Text>
       )}
-      <Link href="/setup">link</Link>
+      <Link href="/setup">Redo setup</Link>
     </View>
   );
 };
