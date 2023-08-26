@@ -9,9 +9,12 @@ import {
 import { Link } from "expo-router";
 
 import useStoredUserData from "../hooks/useStoredUserData";
+
 import { useSwipe } from "../hooks/useSwipe";
 
+import BoomerangUp from "../assets/svg/boomerangUp";
 import Bottle from "../components/Bottle";
+
 import { SIZES, COLORS, WINDOW_HEIGHT } from "../constants/theme";
 import styles from "../styles/global";
 
@@ -94,9 +97,21 @@ const Home = () => {
           styles.swipeContainer,
           {
             transform: [{ translateY: swipeY }],
+            justifyContent: "center",
+            alignItems: "center",
           },
         ]}
-      ></Animated.View>
+      >
+        {/* <BoomerangUp
+          styles={{
+            position: "absolute",
+            top: -600,
+            left: 200,
+            backgroundColor: "red",
+            zIndex: 10,
+          }}
+        /> */}
+      </Animated.View>
     </>
   );
 };
