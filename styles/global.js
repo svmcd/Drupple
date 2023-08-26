@@ -23,6 +23,24 @@ const styles = StyleSheet.create({
     elevation: 18,
     zIndex: 2,
   },
+  swipeContainer: {
+    width: '100%',
+    height: WINDOW_HEIGHT / 1.5,
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: COLORS.white,
+    borderTopLeftRadius: "25px",
+    borderTopRightRadius: "25px",
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 13,
+    },
+    shadowOpacity: 0.24,
+    shadowRadius: 14.86,
+    elevation: 18,
+    zIndex: 2,
+  },
   slidesContainer: {
     padding: SIZES.md,
     gap: 10

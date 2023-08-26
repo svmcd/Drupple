@@ -1,4 +1,5 @@
-import { View, Text } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { View, Text, Animated } from "react-native";
 
 import { COLORS, SIZES } from "../constants/theme";
 
@@ -9,6 +10,16 @@ const Bottle = ({
 }) => {
   const percentageAchieved = currentWaterIntake / waterIntakeGoal / 10;
 
+  const heightFill = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(heightFill, {
+      toValue: percentageAchieved * 2,
+      duration: 500,
+      useNativeDriver: false,
+    }).start();
+  }, [percentageAchieved]);
+
   return (
     <View>
       <View
@@ -16,17 +27,16 @@ const Bottle = ({
           backgroundColor: COLORS.white,
           height: 200,
           width: 100,
-          padding: SIZES.xs,
           justifyContent: "flex-end",
         }}
       >
-        <View
+        <Animated.View
           style={{
             backgroundColor: COLORS.primary,
-            height: `${percentageAchieved}%`,
+            height: heightFill,
             width: "100%",
           }}
-        ></View>
+        ></Animated.View>
       </View>
     </View>
   );
