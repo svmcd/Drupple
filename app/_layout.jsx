@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { Slot } from "expo-router";
 import { useFonts } from "expo-font";
@@ -8,9 +8,11 @@ import Frame from "../assets/svg/Frame";
 
 import styles from "../styles/global";
 
-// SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();
 
 const Layout = () => {
+
+
   const [fontsLoaded] = useFonts({
     PBold: require("../assets/fonts/Poppins-Bold.ttf"),
     PSemiBold: require("../assets/fonts/Poppins-SemiBold.ttf"),
@@ -18,11 +20,11 @@ const Layout = () => {
     PMedium: require("../assets/fonts/Poppins-Medium.ttf"),
   });
 
-  // const onLayoutRootView = useCallback(async () => {
-  //   if (fontsLoaded) {
-  //     await SplashScreen.hideAsync();
-  //   }
-  // }, [fontsLoaded]);
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
 

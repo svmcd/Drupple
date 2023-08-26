@@ -18,7 +18,7 @@ const Home = () => {
       ) : (
         <Text>No data stored yet.</Text>
       )}
-      <Link href="/">link</Link>
+      <Link href="/setup">link</Link>
     </View>
   );
 };

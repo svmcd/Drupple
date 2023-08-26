@@ -1,29 +1,16 @@
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
-} from "react-native";
-
-import Setup from "../components/Setup";
-
-import styles from "../styles/global";
-import { COLORS } from "../constants/theme";
+import { View } from "react-native";
+import { useRootNavigationState, Redirect } from "expo-router";
 
 const Index = () => {
+  const rootNavigationState = useRootNavigationState();
+  const setupCompleted = true;
+
+  if (!rootNavigationState?.key) return null;
+
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : null}
-      style={{ flex: 1, justifyContent: "flex-end" }}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <Setup />
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    <View>
+      {setupCompleted ? <Redirect href="/home" /> : <Redirect href="/setup" />}
+    </View>
   );
 };
 
