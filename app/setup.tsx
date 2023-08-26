@@ -30,16 +30,30 @@ function Setup() {
   const [disabled, setDisabled] = useState(false);
   const [dailyWaterIntake, setDailyWaterIntake] = useState(0);
 
+  const animationDuration = 1250;
+  const animationEasing = "ease-in-out";
+
+  const slideDown = {
+    0: { translateY: 0 },
+    1: { translateY: 650 },
+    animationDuration,
+    animationEasing,
+  };
+
+  const slideUp = {
+    0: { translateY: 650 },
+    1: { translateY: 0 },
+    animationDuration,
+    animationEasing,
+  };
+
   const handleNextPage = async () => {
     setDailyWaterIntake(waterIntake);
     if (currentIndex === 2) {
       if (viewRef.current) {
         viewRef.current
-          .animate(
-            { 0: { translateY: 0 }, 1: { translateY: 650 } },
-            1250,
-            "ease-in-out"
-          )
+          .animate(slideDown)
+
           .then(() => router.push("home"));
       }
       try {
@@ -92,6 +106,7 @@ function Setup() {
         ref={(ref) => {
           viewRef.current = ref;
         }}
+        animation={slideUp}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.container}>
