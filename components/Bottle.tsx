@@ -7,6 +7,8 @@ const Bottle = ({
   currentWaterIntake,
   setCurrentWaterIntake,
 }) => {
+  const percentageAchieved = currentWaterIntake / waterIntakeGoal / 10;
+
   return (
     <View>
       <View
@@ -21,7 +23,7 @@ const Bottle = ({
         <View
           style={{
             backgroundColor: COLORS.primary,
-            height: "72%",
+            height: `${percentageAchieved}%`,
             width: "100%",
           }}
         ></View>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 
 import useStoredUserData from "../hooks/useStoredUserData";
@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <SafeAreaView>
-      <View style={{ position: "absolute", top: 200 }}>
+      <View style={{ position: "absolute", top: 200, zIndex: 2 }}>
         <Text>Stored User Data:</Text>
         {userData ? (
           <View>
@@ -41,7 +41,7 @@ const Home = () => {
       >
         <View>
           <Text>
-            {currentWaterIntake}/{userData.dailyWaterIntake * 1000} ML
+            {currentWaterIntake}/{userData?.dailyWaterIntake * 1000} ML
           </Text>
         </View>
         <Bottle
@@ -49,6 +49,14 @@ const Home = () => {
           currentWaterIntake={currentWaterIntake}
           setCurrentWaterIntake={setCurrentWaterIntake}
         />
+        <TouchableOpacity
+          onPress={() => setCurrentWaterIntake(currentWaterIntake + 200)}
+        >
+          <Text>Add 200 ml</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setCurrentWaterIntake(0)}>
+          <Text>Reset</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
