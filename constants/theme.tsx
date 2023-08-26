@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 const COLORS = {
   primary: "#5FBFF9",
   secondary: "#C0E7FF",
@@ -40,4 +42,6 @@ const ANIMATIONS = {
   },
 };
 
-export { COLORS, FONT, SIZES, ANIMATIONS };
+const WINDOW_HEIGHT = Dimensions.get("window").height;
+
+export { COLORS, FONT, SIZES, ANIMATIONS, WINDOW_HEIGHT };
