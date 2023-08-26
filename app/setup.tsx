@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-
 import {
   Text,
   View,
@@ -11,12 +10,14 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import * as Animatable from "react-native-animatable";
 
 import SetupCarousel from "../components/SetupCarousel";
+import { calculateWaterIntake } from "../utils/waterCalc";
 import Dots from "../assets/svg/Dots";
 import styles from "../styles/global";
-import { COLORS } from "../constants/theme";
+import { COLORS, ANIMATIONS } from "../constants/theme";
 
 function Setup() {
   const router = useRouter();
@@ -30,29 +31,12 @@ function Setup() {
   const [disabled, setDisabled] = useState(false);
   const [dailyWaterIntake, setDailyWaterIntake] = useState(0);
 
-  const animationDuration = 1250;
-  const animationEasing = "ease-in-out";
-
-  const slideDown = {
-    0: { translateY: 0 },
-    1: { translateY: 650 },
-    animationDuration,
-    animationEasing,
-  };
-
-  const slideUp = {
-    0: { translateY: 650 },
-    1: { translateY: 0 },
-    animationDuration,
-    animationEasing,
-  };
-
   const handleNextPage = async () => {
     setDailyWaterIntake(waterIntake);
     if (currentIndex === 2) {
       if (viewRef.current) {
         viewRef.current
-          .animate(slideDown)
+          .animate(ANIMATIONS.slideDown)
 
           .then(() => router.push("home"));
       }
@@ -83,19 +67,7 @@ function Setup() {
     }, 200);
   };
 
-  const WATER_PER_KG = 0.035;
-  const activityMultipliers = {
-    Sedentary: 1.0,
-    "Lightly active": 1.11,
-    "Moderately active": 1.24,
-    Active: 1.35,
-    "Very Active": 1.42,
-  };
-
-  const waterIntake =
-    Math.round(
-      parseInt(weight) * WATER_PER_KG * activityMultipliers[selectedOption] * 10
-    ) / 10;
+  const waterIntake = calculateWaterIntake(weight, selectedOption);
 
   return (
     <KeyboardAvoidingView
@@ -106,7 +78,7 @@ function Setup() {
         ref={(ref) => {
           viewRef.current = ref;
         }}
-        animation={slideUp}
+        animation={ANIMATIONS.slideUp}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.container}>

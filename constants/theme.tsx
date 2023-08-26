@@ -25,4 +25,19 @@ const SIZES = {
   xxxl: 60,
 };
 
-export { COLORS, FONT, SIZES };
+const ANIMATIONS = {
+  slideDown: {
+    0: { translateY: 0 },
+    1: { translateY: 650 },
+    animationDuration: 1250,
+    animationEasing: "ease-in-out",
+  },
+  slideUp: {
+    0: { translateY: 650 },
+    1: { translateY: 0 },
+    animationDuration: 1250,
+    animationEasing: "ease-in-out",
+  },
+};
+
+export { COLORS, FONT, SIZES, ANIMATIONS };
