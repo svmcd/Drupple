@@ -26,24 +26,31 @@ function Setup() {
   const [autoPlayMode, setAutoPlayMode] = useState(false);
   const [autoPlayReverseMode, setAutoPlayReverseMode] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [weight, onChangeWeight] = useState("");
+  const [weight, setWeight] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [dailyWaterIntake, setDailyWaterIntake] = useState(0);
+  const [setupFinished, setSetupFinished] = useState(false);
+
+  const userData = {
+    dailyWaterIntake,
+    selectedOption,
+    weight,
+    setupFinished,
+  };
 
   const handleNextPage = async () => {
-    setDailyWaterIntake(waterIntake);
-    if (currentIndex === 2) {
-      if (viewRef.current) {
-        viewRef.current
-          .animate(ANIMATIONS.slideDown)
-
-          .then(() => router.push("home"));
-      }
+    setDailyWaterIntake(calculateWaterIntake(weight, selectedOption));
+    setSetupFinished(true);
+    if (currentIndex === 2 && viewRef.current) {
       try {
-        const data = { dailyWaterIntake, selectedOption, weight };
-        const jsonValue = JSON.stringify(data);
-        await AsyncStorage.setItem("userData", jsonValue);
+        await AsyncStorage.setItem("userData", JSON.stringify(userData));
+        try {
+          await viewRef.current.animate(ANIMATIONS.slideDown);
+          router.push("home");
+        } catch (e) {
+          console.error("Error animating or routing:", e);
+        }
       } catch (e) {
         console.error("Error storing data:", e);
       }
@@ -66,8 +73,6 @@ function Setup() {
       setAutoPlayReverseMode(false);
     }, 200);
   };
-
-  const waterIntake = calculateWaterIntake(weight, selectedOption);
 
   return (
     <KeyboardAvoidingView
@@ -95,7 +100,7 @@ function Setup() {
                 autoPlayReverseMode={autoPlayReverseMode}
                 setCurrentIndex={setCurrentIndex}
                 weight={weight}
-                onChangeWeight={onChangeWeight}
+                setWeight={setWeight}
                 selectedOption={selectedOption}
                 setSelectedOption={setSelectedOption}
               />

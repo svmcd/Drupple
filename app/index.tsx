@@ -1,15 +1,28 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useRootNavigationState, Redirect } from "expo-router";
+import useStoredUserData from "../hooks/useStoredUserData";
 
 const Index = () => {
+  const userData = useStoredUserData();
   const rootNavigationState = useRootNavigationState();
-  const setupCompleted = true;
 
   if (!rootNavigationState?.key) return null;
 
+  if (!userData) {
+    return (
+      <Text style={{ position: "absolute", top: 200, left: 200 }}>
+        Loading...
+      </Text>
+    );
+  }
+
   return (
     <View>
-      {setupCompleted ? <Redirect href="/home" /> : <Redirect href="/setup" />}
+      {userData.setupFinished ? (
+        <Redirect href="/home" />
+      ) : (
+        <Redirect href="/setup" />
+      )}
     </View>
   );
 };

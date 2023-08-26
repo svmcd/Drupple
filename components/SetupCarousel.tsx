@@ -8,7 +8,7 @@ const SetupCarousel = ({
   autoPlayReverseMode,
   setCurrentIndex,
   weight,
-  onChangeWeight,
+  setWeight,
   selectedOption,
   setSelectedOption,
 }) => {
@@ -47,7 +47,7 @@ const SetupCarousel = ({
           text={item.text}
           index={index}
           weight={weight}
-          onChangeWeight={onChangeWeight}
+          setWeight={setWeight}
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
         />

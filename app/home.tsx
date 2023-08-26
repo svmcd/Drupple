@@ -14,6 +14,7 @@ const Home = () => {
           <Text>Daily water intake: {userData.dailyWaterIntake} liter</Text>
           <Text>Selected Option: {userData.selectedOption}</Text>
           <Text>Weight: {userData.weight}</Text>
+          <Text> {userData.setupFinished ? "finished" : "not finished"}</Text>
         </View>
       ) : (
         <Text>No data stored yet.</Text>

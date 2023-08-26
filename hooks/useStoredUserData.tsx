@@ -5,6 +5,7 @@ type UserData = {
   dailyWaterIntake: number;
   selectedOption: string;
   weight: string;
+  setupFinished: boolean;
 };
 
 function useStoredUserData() {
