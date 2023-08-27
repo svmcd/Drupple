@@ -43,5 +43,6 @@ const ANIMATIONS = {
 };
 
 const WINDOW_HEIGHT = Dimensions.get("window").height;
+const WINDOW_WIDTH = Dimensions.get("window").width;
 
-export { COLORS, FONT, SIZES, ANIMATIONS, WINDOW_HEIGHT };
+export { COLORS, FONT, SIZES, ANIMATIONS, WINDOW_HEIGHT, WINDOW_WIDTH };

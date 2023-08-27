@@ -6,6 +6,7 @@ import {
   ScrollView,
 } from "react-native";
 
+import { calculateWaterIntake } from "../utils/waterCalc";
 import { SIZES, COLORS } from "../constants/theme";
 import styles from "../styles/global";
 
@@ -22,19 +23,7 @@ const SetupCarouselSlide = ({
   const nonColoredPart = index === 0 ? title.slice(0, -8) : title;
   const nonColoredPart2 = index === 0 ? title.slice(18) : title;
 
-  const WATER_PER_KG = 0.035;
-  const activityMultipliers = {
-    Sedentary: 1.0,
-    "Lightly active": 1.11,
-    "Moderately active": 1.24,
-    Active: 1.35,
-    "Very Active": 1.42,
-  };
-
-  const waterIntake =
-    Math.round(
-      parseInt(weight) * WATER_PER_KG * activityMultipliers[selectedOption] * 10
-    ) / 10;
+  const waterIntake = calculateWaterIntake(weight, selectedOption);
 
   return (
     <View

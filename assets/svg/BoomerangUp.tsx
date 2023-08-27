@@ -7,7 +7,7 @@ const svg = `<svg width="55" height="16" viewBox="0 0 55 16" fill="none" xmlns="
 `;
 
 const BoomerangUp = ({ styles }) => {
-  return <SvgXml xml={svg} height="10%" style={styles} />;
+  return <SvgXml xml={svg} height="100%" style={styles} />;
 };
 
 export default BoomerangUp;

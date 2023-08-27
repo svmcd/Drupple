@@ -9,11 +9,12 @@ import {
 import { Link } from "expo-router";
 
 import useStoredUserData from "../hooks/useStoredUserData";
-
 import { useSwipe } from "../hooks/useSwipe";
 
-import BoomerangUp from "../assets/svg/boomerangUp";
+import BoomerangUp from "../assets/svg/BoomerangUp";
+import DevMenu from "../components/DevMenu";
 import Bottle from "../components/Bottle";
+import ProgressContainer from "../components/ProgressContainer";
 
 import { SIZES, COLORS, WINDOW_HEIGHT } from "../constants/theme";
 import styles from "../styles/global";
@@ -22,10 +23,13 @@ const Home = () => {
   const userData = useStoredUserData();
 
   const [currentWaterIntake, setCurrentWaterIntake] = useState(0);
+  const [boomerangDeg, setBoomerangDeg] = useState("0deg");
+  const [progStatus, setProgStatus] = useState("hello");
 
   const swipeY = useRef(new Animated.Value(450)).current;
 
   const handleSwipeUp = () => {
+    setBoomerangDeg("180deg");
     Animated.timing(swipeY, {
       toValue: 0,
       duration: 300,
@@ -34,6 +38,7 @@ const Home = () => {
   };
 
   const handleSwipeDown = () => {
+    setBoomerangDeg("0deg");
     Animated.timing(swipeY, {
       toValue: 450,
       duration: 300,
@@ -41,76 +46,72 @@ const Home = () => {
     }).start();
   };
 
+  const percentageAchieved =
+    currentWaterIntake / userData?.dailyWaterIntake / 10;
+
   const { onTouchStart, onTouchEnd } = useSwipe(handleSwipeUp, handleSwipeDown);
 
   return (
     <>
-      <SafeAreaView>
-        {/* <View style={{ position: "absolute", top: 200, zIndex: 2 }}>
-          <Text>Stored User Data:</Text>
-          {userData ? (
-            <View>
-              <Text>Daily water intake: {userData.dailyWaterIntake} liter</Text>
-              <Text>Selected Option: {userData.selectedOption}</Text>
-              <Text>Weight: {userData.weight}</Text>
-              <Text>
-                Setup progress:
-                {userData.setupFinished ? " Finished" : " Not finished"}
-              </Text>
-            </View>
-          ) : (
-            <Text>No data stored yet.</Text>
-          )}
-          <Link href="/setup">Redo setup</Link>
-        </View> */}
+      <DevMenu setCurrentWaterIntake={setCurrentWaterIntake} />
+      <SafeAreaView
+        style={{
+          justifyContent: "flex-end",
+          height: WINDOW_HEIGHT,
+          marginBottom: WINDOW_HEIGHT / 6.5,
+          gap: 200,
+        }}
+      >
+        <ProgressContainer
+          currentWaterIntake={currentWaterIntake}
+          waterIntakeGoal={userData?.dailyWaterIntake}
+          percentageAchieved={percentageAchieved}
+        />
         <View
           style={{
-            height: WINDOW_HEIGHT,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <View>
-            <Text>
-              {currentWaterIntake} of {userData?.dailyWaterIntake * 1000} ML
-            </Text>
-          </View>
           <Bottle
             waterIntakeGoal={userData?.dailyWaterIntake}
             currentWaterIntake={currentWaterIntake}
             setCurrentWaterIntake={setCurrentWaterIntake}
+            percentageAchieved={percentageAchieved}
           />
           <TouchableOpacity
             onPress={() => setCurrentWaterIntake(currentWaterIntake + 200)}
           >
-            <Text>Add 200 ml</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setCurrentWaterIntake(0)}>
-            <Text>Reset</Text>
+            <Text>Add 200 ml </Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
       <Animated.View
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
         style={[
           styles.swipeContainer,
           {
-            transform: [{ translateY: swipeY }],
-            justifyContent: "center",
+            transform: [{ translateY: swipeY || 450 }],
             alignItems: "center",
           },
         ]}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
-        {/* <BoomerangUp
-          styles={{
-            position: "absolute",
-            top: -600,
-            left: 200,
-            backgroundColor: "red",
-            zIndex: 10,
+        <View
+          style={{
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            height: 40,
           }}
-        /> */}
+        >
+          <BoomerangUp
+            styles={{
+              zIndex: 10,
+              transform: [{ rotate: boomerangDeg || "0deg" }],
+            }}
+          />
+        </View>
       </Animated.View>
     </>
   );
