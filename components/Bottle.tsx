@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import { View, Text, Animated, Easing, StyleSheet } from "react-native";
 
+import * as Animatable from "react-native-animatable";
+
 import Waves from "../assets/svg/Waves";
-import { COLORS, SIZES } from "../constants/theme";
+import { COLORS, ANIMATIONS } from "../constants/theme";
 
 const Bottle = ({
   waterIntakeGoal,
@@ -12,7 +14,7 @@ const Bottle = ({
 }) => {
   const heightFill = useRef(new Animated.Value(0)).current;
   const translationValue = useRef(new Animated.Value(0)).current;
-  const screenWidth = -50;
+  const screenWidth = -80;
   const animationDuration = 7500;
 
   useEffect(() => {
@@ -35,14 +37,17 @@ const Bottle = ({
 
   useEffect(() => {
     Animated.timing(heightFill, {
-      toValue: percentageAchieved * 2.85,
+      toValue: percentageAchieved * 4.25,
       duration: 500,
       useNativeDriver: false,
     }).start();
   }, [percentageAchieved]);
 
   return (
-    <View style={{ overflow: "hidden", paddingBottom: 5 }}>
+    <Animatable.View
+      style={{ overflow: "hidden", paddingBottom: 5 }}
+      animation={ANIMATIONS.slideRight}
+    >
       <View style={bottleStyles.bottleOuter}>
         <View style={bottleStyles.highlight} />
         <View style={bottleStyles.highlightSmall} />
@@ -61,7 +66,7 @@ const Bottle = ({
           </Animated.View>
         </View>
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 
@@ -69,6 +74,7 @@ export default Bottle;
 
 const bottleStyles = StyleSheet.create({
   bottleOuter: {
+    zIndex: 9,
     padding: 5,
     paddingTop: 0,
     backgroundColor: COLORS.white,
@@ -88,16 +94,17 @@ const bottleStyles = StyleSheet.create({
   bottleInner: {
     overflow: "hidden",
     backgroundColor: COLORS.white,
-    height: 300,
-    width: 150,
+    height: 400,
+    width: 200,
     justifyContent: "flex-end",
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
   },
   water: {
-    backgroundColor: COLORS.primary,
+    // backgroundColor: COLORS.primary,
+    backgroundColor: "#5FBFF9",
     height: 0,
-    maxHeight: 285,
+    maxHeight: 380,
     width: "100%",
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
@@ -126,7 +133,7 @@ const bottleStyles = StyleSheet.create({
   },
   wavesContainer: {
     transform: [{ translateX: 0 }],
-    width: 210,
+    width: 280,
     height: 90,
     position: "absolute",
     top: -55,

@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 
+import * as Animatable from "react-native-animatable";
+
 import useStoredUserData from "../hooks/useStoredUserData";
 import { useSwipe } from "../hooks/useSwipe";
 
@@ -16,7 +18,7 @@ import DevMenu from "../components/DevMenu";
 import Bottle from "../components/Bottle";
 import ProgressContainer from "../components/ProgressContainer";
 
-import { SIZES, COLORS, WINDOW_HEIGHT } from "../constants/theme";
+import { SIZES, COLORS, WINDOW_HEIGHT, ANIMATIONS } from "../constants/theme";
 import styles from "../styles/global";
 
 const Home = () => {
@@ -59,7 +61,7 @@ const Home = () => {
           justifyContent: "flex-end",
           height: WINDOW_HEIGHT,
           marginBottom: WINDOW_HEIGHT / 6.5,
-          gap: 200,
+          gap: 75,
         }}
       >
         <ProgressContainer
@@ -86,33 +88,35 @@ const Home = () => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-      <Animated.View
-        style={[
-          styles.swipeContainer,
-          {
-            transform: [{ translateY: swipeY || 450 }],
-            alignItems: "center",
-          },
-        ]}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        <View
-          style={{
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-            height: 40,
-          }}
+      <Animatable.View animation={ANIMATIONS.slideUp}>
+        <Animated.View
+          style={[
+            styles.swipeContainer,
+            {
+              transform: [{ translateY: swipeY || 450 }],
+              alignItems: "center",
+            },
+          ]}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
-          <BoomerangUp
-            styles={{
-              zIndex: 10,
-              transform: [{ rotate: boomerangDeg || "0deg" }],
+          <View
+            style={{
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              height: 40,
             }}
-          />
-        </View>
-      </Animated.View>
+          >
+            <BoomerangUp
+              styles={{
+                zIndex: 10,
+                transform: [{ rotate: boomerangDeg || "0deg" }],
+              }}
+            />
+          </View>
+        </Animated.View>
+      </Animatable.View>
     </>
   );
 };

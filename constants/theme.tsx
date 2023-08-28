@@ -31,13 +31,19 @@ const ANIMATIONS = {
   slideDown: {
     0: { translateY: 0 },
     1: { translateY: 650 },
-    animationDuration: 1250,
+    animationDuration: 1500,
     animationEasing: "ease-in-out",
   },
   slideUp: {
     0: { translateY: 650 },
     1: { translateY: 0 },
     animationDuration: 1250,
+    animationEasing: "ease-in-out",
+  },
+  slideRight: {
+    0: { translateX: -650 },
+    1: { translateX: 0 },
+    animationDuration: 1500,
     animationEasing: "ease-in-out",
   },
 };

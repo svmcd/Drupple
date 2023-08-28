@@ -1,7 +1,9 @@
 import { useRef, useEffect } from "react";
 import { View, Text, Animated } from "react-native";
 
-import { COLORS, SIZES, WINDOW_WIDTH } from "../constants/theme";
+import * as Animatable from "react-native-animatable";
+
+import { COLORS, SIZES, WINDOW_WIDTH, ANIMATIONS } from "../constants/theme";
 import styles from "../styles/global";
 
 const ProgressContainer = ({
@@ -13,18 +15,21 @@ const ProgressContainer = ({
 
   useEffect(() => {
     Animated.timing(barFill, {
-      toValue: percentageAchieved * 2.92,
+      toValue: percentageAchieved * 2.8,
       duration: 500,
       useNativeDriver: false,
     }).start();
   }, [percentageAchieved]);
 
   return (
-    <View style={{ overflow: "hidden", paddingBottom: 5 }}>
+    <Animatable.View
+      style={{ overflow: "hidden", paddingBottom: 5 }}
+      animation={ANIMATIONS.slideRight}
+    >
       <View
         style={{
           backgroundColor: COLORS.white,
-          width: WINDOW_WIDTH / 1.25,
+          width: WINDOW_WIDTH / 1.3,
           borderTopRightRadius: 10,
           borderBottomRightRadius: 10,
           paddingHorizontal: 10,
@@ -41,10 +46,13 @@ const ProgressContainer = ({
         }}
       >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={styles.text}>
-            <Text style={styles.textBlue}>{currentWaterIntake}</Text>/
-            {waterIntakeGoal * 1000}ML
-          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={styles.text}>
+              <Text style={styles.textBlue}>{currentWaterIntake}</Text>/
+              {waterIntakeGoal * 1000}
+            </Text>
+            <Text style={[styles.textSmall]}>ML</Text>
+          </View>
           <Text style={styles.text}>{Math.round(percentageAchieved)}%</Text>
         </View>
         <View>
@@ -68,7 +76,7 @@ const ProgressContainer = ({
           </View>
         </View>
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 

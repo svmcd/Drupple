@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,
-      height: 13,
+      height: 2,
     },
-    shadowOpacity: 0.24,
-    shadowRadius: 14.86,
-    elevation: 18,
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
     zIndex: 2,
   },
   slidesContainer: {
@@ -63,6 +63,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: FONT.medium,
     fontSize: SIZES.lg,
+    color: COLORS.black,
+  },
+  textSmall: {
+    fontFamily: FONT.medium,
+    fontSize: SIZES.md,
     color: COLORS.black,
   },
   textWhite: {
