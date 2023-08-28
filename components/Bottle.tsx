@@ -12,7 +12,7 @@ const Bottle = ({
 }) => {
   const heightFill = useRef(new Animated.Value(0)).current;
   const translationValue = useRef(new Animated.Value(0)).current;
-  const screenWidth = -65;
+  const screenWidth = -50;
   const animationDuration = 7500;
 
   useEffect(() => {
@@ -97,6 +97,7 @@ const bottleStyles = StyleSheet.create({
   water: {
     backgroundColor: COLORS.primary,
     height: 0,
+    maxHeight: 285,
     width: "100%",
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,

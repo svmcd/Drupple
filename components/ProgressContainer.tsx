@@ -13,7 +13,7 @@ const ProgressContainer = ({
 
   useEffect(() => {
     Animated.timing(barFill, {
-      toValue: percentageAchieved * 2.435,
+      toValue: percentageAchieved * 2.92,
       duration: 500,
       useNativeDriver: false,
     }).start();
@@ -59,6 +59,7 @@ const ProgressContainer = ({
             <Animated.View
               style={{
                 width: barFill || 0,
+                maxWidth: "100%",
                 height: 2.5,
                 backgroundColor: COLORS.primary,
                 borderRadius: 25,
