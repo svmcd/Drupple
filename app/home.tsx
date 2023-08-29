@@ -4,9 +4,8 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
-  Animated, // Import Animated
+  Animated,
 } from "react-native";
-import { Link } from "expo-router";
 
 import * as Animatable from "react-native-animatable";
 
@@ -17,6 +16,7 @@ import BoomerangUp from "../assets/svg/BoomerangUp";
 import DevMenu from "../components/DevMenu";
 import Bottle from "../components/Bottle";
 import ProgressContainer from "../components/ProgressContainer";
+import SlideUpContainer from "../components/SlideUpContainer";
 
 import { SIZES, COLORS, WINDOW_HEIGHT, ANIMATIONS } from "../constants/theme";
 import styles from "../styles/global";
@@ -26,7 +26,6 @@ const Home = () => {
 
   const [currentWaterIntake, setCurrentWaterIntake] = useState(0);
   const [boomerangDeg, setBoomerangDeg] = useState("0deg");
-  const [progStatus, setProgStatus] = useState("hello");
 
   const swipeY = useRef(new Animated.Value(450)).current;
 
@@ -88,35 +87,12 @@ const Home = () => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-      <Animatable.View animation={ANIMATIONS.slideUp}>
-        <Animated.View
-          style={[
-            styles.swipeContainer,
-            {
-              transform: [{ translateY: swipeY || 450 }],
-              alignItems: "center",
-            },
-          ]}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
-          <View
-            style={{
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 40,
-            }}
-          >
-            <BoomerangUp
-              styles={{
-                zIndex: 10,
-                transform: [{ rotate: boomerangDeg || "0deg" }],
-              }}
-            />
-          </View>
-        </Animated.View>
-      </Animatable.View>
+      <SlideUpContainer
+        boomerangDeg={boomerangDeg}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        swipeY={swipeY}
+      />
     </>
   );
 };

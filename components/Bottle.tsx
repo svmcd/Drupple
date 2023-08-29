@@ -37,7 +37,7 @@ const Bottle = ({
 
   useEffect(() => {
     Animated.timing(heightFill, {
-      toValue: percentageAchieved * 4.25,
+      toValue: percentageAchieved * 3.8,
       duration: 500,
       useNativeDriver: false,
     }).start();
@@ -75,7 +75,7 @@ export default Bottle;
 const bottleStyles = StyleSheet.create({
   bottleOuter: {
     zIndex: 9,
-    padding: 5,
+    padding: 7.5,
     paddingTop: 0,
     backgroundColor: COLORS.white,
     borderTopLeftRadius: 5,
@@ -114,7 +114,7 @@ const bottleStyles = StyleSheet.create({
     backgroundColor: COLORS.white,
     opacity: 0.5,
     top: 80,
-    right: 15,
+    right: 20,
     zIndex: 2,
     width: 8,
     height: 75,
@@ -125,7 +125,7 @@ const bottleStyles = StyleSheet.create({
     backgroundColor: COLORS.white,
     opacity: 0.5,
     top: 170,
-    right: 15,
+    right: 20,
     zIndex: 2,
     width: 8,
     height: 15,
