@@ -27,7 +27,7 @@ const Home = () => {
   const [currentWaterIntake, setCurrentWaterIntake] = useState(0);
   const [boomerangDeg, setBoomerangDeg] = useState("0deg");
 
-  const swipeY = useRef(new Animated.Value(450)).current;
+  const swipeY = useRef(new Animated.Value(200)).current;
 
   const handleSwipeUp = () => {
     setBoomerangDeg("180deg");
@@ -41,7 +41,7 @@ const Home = () => {
   const handleSwipeDown = () => {
     setBoomerangDeg("0deg");
     Animated.timing(swipeY, {
-      toValue: 450,
+      toValue: 200,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -59,8 +59,8 @@ const Home = () => {
         style={{
           justifyContent: "flex-end",
           height: WINDOW_HEIGHT,
-          marginBottom: WINDOW_HEIGHT / 6.5,
-          gap: 75,
+          marginBottom: WINDOW_HEIGHT / 5,
+          gap: 50,
         }}
       >
         <ProgressContainer
@@ -92,6 +92,8 @@ const Home = () => {
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
         swipeY={swipeY}
+        currentWaterIntake={currentWaterIntake}
+        setCurrentWaterIntake={setCurrentWaterIntake}
       />
     </>
   );
